@@ -1,0 +1,8 @@
+{
+  "development": {
+    "base_path": "/var/www/html/"
+  },
+  "production": {
+    "base_path": "/files/portal/recargas/backend/src/"
+  }
+}

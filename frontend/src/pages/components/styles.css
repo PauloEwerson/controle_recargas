@@ -1,0 +1,8 @@
+.table-sales {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-sales thead {
+  background: black;
+}

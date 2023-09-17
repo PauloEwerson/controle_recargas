@@ -1,0 +1,10 @@
+{
+  "db_host": "localhost",
+  "db_name": "db_production_demo",
+  "db_user": "db_user_demo",
+  "db_password": "db_password_demo",
+  "reuse_operators": false,
+  "filial": "filial_number_demo",
+  "db_charset": "utf8",
+  "installed": false
+}

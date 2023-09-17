@@ -1,0 +1,17 @@
+.report-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.report-page table {
+  width: 75%;
+}
+
+.report-page thead {
+  background: black;
+  color: white;
+}

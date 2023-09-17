@@ -1,0 +1,149 @@
+#countdown-wrap {
+  width: 100%;
+  padding: 20px;
+  font-family: arial;
+  margin-bottom: 2rem;
+}
+
+#goal {
+  font-size: 48px;
+  text-align: right;
+  color: rgb(0, 0, 0);
+  @media only screen and (max-width : 640px) {
+    text-align: center;
+  }
+}
+
+#glass {
+  width: 100%;
+  height: 20px;
+  background: #c7c7c7;
+  border-radius: 10px;
+  float: left;
+  overflow: hidden;
+}
+
+#progress {
+  float: left;
+  height: 20px;
+  z-index: 333;
+  color: #fff;
+  font-weight: bold;
+}
+
+.goal-stat {
+  width: 20%;
+  padding: 10px;
+  float: left;
+  margin: 0;
+  color: rgb(0, 0, 0);
+  cursor: help;
+
+  @media only screen and (max-width : 640px) {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+.progress-bar-dark_red {
+  background: #780116;
+}
+
+.progress-bar-red {
+  background: #c32f27;
+}
+
+.progress-bar-purple {
+  background: #7b2cbf;
+}
+
+.progress-bar-blue {
+  background: #0096c7;
+}
+
+.progress-bar-yellow {
+  background: #f5af01;
+}
+
+.progress-bar-green {
+  background: #539b32;
+}
+
+/* Efeito gradiente */
+.progress-bar-gold {
+  background: repeating-linear-gradient( 105deg, 
+  #ffb338 0% , 
+  #c27b00 5%,
+  #ffb338 12%);
+}
+
+@keyframes light {
+  to {
+      transform: translate(50%, 50%);
+  }
+}
+
+.goal-number {
+  font-weight: bold;
+}
+
+.goal-number, .goal-label {
+  display: block;
+}
+
+
+/* Modal Styles */
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal-body {
+  font-size: 14px;
+}
+
+.progress-bar-color {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+/* Layout Flexível */
+.modal-flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.modal-flex-container p {
+  margin: 0;
+}
+
+.modal-description {
+  flex: 2;
+}
+
+.modal-action {
+  flex: 3;
+}
+
+.modal-calculation {
+  flex: 2;
+}
+
+.modal-flex-container:nth-child(odd) {
+  background-color: #f7f7f7; /* Cor clara para linhas ímpares */
+}
+
+.modal-flex-container:nth-child(even) {
+  background-color: #e9e9e9; /* Cor um pouco mais escura para linhas pares */
+}
+
+.modal-flex-container {
+  padding: 8px 0;
+}
+

@@ -1,0 +1,10 @@
+{
+  "db_host": "db",
+  "db_name": "recargas_db",
+  "db_user": "user",
+  "db_password": "password",
+  "reuse_operators": false,
+  "filial": "999",
+  "db_charset": "utf8",
+  "installed": false
+}

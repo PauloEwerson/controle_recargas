@@ -1,0 +1,138 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section-menu-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: var(--bg);
+  height: 100%;
+}
+
+/* ------ */
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  height: 100vh;
+}
+
+/* sidebar */
+.sidebar {
+  height: 100vh;
+  background: var(--bgMenu);
+	box-shadow: 0 0 0.25em hsla(223,10%,10%,0.5);
+	transition: transform 0.3s ease-in-out;
+  width: 17%;
+  height: 100%;
+  position: fixed;
+  border-right: 5px solid var(--verde);
+  text-align: right;
+}
+
+/* sidebar components */
+.sidebar-header {
+  text-align: center;
+}
+
+.sidebar-header img {
+  background: white;
+  border-radius: 0 0 25px 25px;
+  border-bottom: 5px solid var(--verde);
+  border-right: 5px solid var(--verde);
+  box-shadow: 5px 5px 0.25em hsla(223,10%,10%,0.5);
+  padding: 20px;
+  width: 50%;
+}
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+}
+
+.components {
+  font-weight: 500;
+  margin: 20px 0;
+  color: white;
+}
+
+.components a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  padding: 10px;
+  width: 100%;
+}
+
+.active {
+  background-color: var(--bgActive);
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.menu-content:hover {
+  color: #ffffff;
+  background-color: var(--buttonHoverBg);
+}
+
+.menu-content span {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  width: 30%;
+}
+
+.menu-content button {
+  width: 70%;
+}
+
+/* main */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.nav-link {
+  background: none;
+  margin-left: 1rem;
+  text-align: start;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.last-update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.disabled-button {
+  cursor: not-allowed;
+
+}

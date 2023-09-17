@@ -1,0 +1,146 @@
+.operadores-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.section-table {
+  width: 100%;
+}
+
+.section-table-cad {
+  margin: 2rem;
+  width: 90%;
+}
+
+.section-table-cad td {
+  border: 4px solid rgb(221, 221, 221);
+}
+
+.table-name {
+  width: 50%;
+}
+
+.table-matricula {
+  width: 25%;
+}
+
+.table-acoes {
+  width: 25%;
+}
+
+.section-table-cad table {
+  width: 100%;
+}
+
+.section-table-cad thead {
+  background: black;
+}
+
+.button-green {
+  border-radius: 20px;
+  border: 1px solid #0d8867;
+  background: var(--verde);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em 1rem;
+  text-transform: uppercase;
+  margin: 0 0.5rem;
+  margin-top: 0.2rem;
+  transition: transform 80ms ease-in;
+}
+
+.button-green:hover {
+  background: #0d8867;
+  transition: 80ms ease-in;
+}
+
+.button-red {
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #b81d02;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.7em 1rem;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.button-red:hover {
+  background-color: #9b1a03;
+  transition: transform 80ms ease-in;
+}
+
+.button-editar:active {
+  transform: scale(0.95);
+}
+
+.button-editar:focus {
+  outline: none;
+}
+
+p {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+label {
+  font-weight: bold;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.button-form {
+  padding: 0.2rem 1rem;
+  font-size: 1rem;
+  background-color: var(--formBg);
+  /* background-color: var(--buttonHoverBg); */
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.button-form:hover {
+  background-color: rgb(63, 63, 63);;
+}
+
+thead {
+  background-color: var(--formBg);
+}
+
+th {
+  color: #fff;
+}
+
+.section-pagination {
+  align-items: center;
+  margin-bottom: 1rem 0;
+  width: 100%;
+  height: 100%;
+}
+
+.section-pagination button {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 0.2rem 0.2rem;
+  margin: 0.2rem;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}

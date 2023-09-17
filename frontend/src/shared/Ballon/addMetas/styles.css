@@ -1,0 +1,21 @@
+.metas-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.metas, .metas input[type=text], .metas input[type=file]+button {
+  margin-bottom: 0.75em;
+  text-align: center;
+}
+
+.metas input[type=text] {
+  width: 100%;
+}
+
+.metas button {
+  width: 100%;
+}

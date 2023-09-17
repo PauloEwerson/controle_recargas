@@ -1,0 +1,16 @@
+# Desativa a listagem de diretório
+Options -Indexes
+
+# Bloqueia o acesso aos arquivos de configuração
+<Files ~ "\\.(json|conf|config|ini|log|bak|sql|phps)$">
+    Order allow,deny
+    Deny from all
+</Files>
+
+RewriteEngine On
+# Se o arquivo ou diretório existir, use-o diretamente
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+# Se não, use o index.html
+RewriteRule ^ /index.html

@@ -1,0 +1,55 @@
+* {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--bg: rgb(213, 213, 213);
+	--bgMenu: #fd7e14;
+	--buttonBg: #f35727;
+	--buttonHoverBg: #e84f20;
+	--bgActive: #df4d20;
+	--formBg: #fff;
+	--inputBorder: #abafba;
+	--inputBg: #fff;
+	--inputDisableBg: #e3e4e8;
+	--pColor: #17181c;
+	--bgFooter: rgb(171, 171, 171);
+	--verde: #009e61;
+}
+
+button[disabled] {
+	cursor: not-allowed;
+}
+
+button:not[disabled] {
+	cursor: pointer
+}
+
+/* Personalização da barra de scroll */
+body::-webkit-scrollbar {
+	width: 0.50rem;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: var(--verde);
+	border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+	border-radius: 10px;
+	background-color: var(--buttonHoverBg);
+}
+
+@media print {
+	.print-only {
+		display: block !important;
+	}
+
+	.no-print {
+		display: none !important;
+	}
+}

@@ -1,0 +1,213 @@
+.ballon {
+	border-radius: 0.375em 0.375em 0 0;
+	position: fixed;
+  margin-left: 1rem;
+	bottom: 0;
+	margin-bottom: 1rem;
+	width: 18rem;
+}
+
+.ballon button {
+	background: var(--buttonBg);
+	border-radius: 0.375em;
+	color: #fff;
+	margin-bottom: 1em;
+	padding: 0.5em 1em;
+	transition: background 0.1s linear;
+}
+
+.ballon button:hover {
+	background: var(--buttonHoverBg);
+}
+
+.ballon button:focus {
+	outline: 0;
+}
+
+.ballon input {
+	border-radius: 0.25em;
+	box-shadow: 0 0 0 1px var(--inputBorder) inset;
+	padding: 0.75em;
+}
+
+.ballon input:disabled {
+	background: var(--inputDisableBg);
+	cursor: not-allowed;
+	text-overflow: ellipsis;
+}
+
+/* ---------- */
+
+.btn-Ballon {
+	color: white;
+	text-align: center;
+}
+
+.btn-Ballon form {
+	padding: 1.5em 1.5em 0 1.5em;
+	position: relative;
+}
+
+.btn-Ballon label {
+	display: inline-block;
+	font-weight: bold;
+}
+
+.button-input {
+	display: block;
+	width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#demo-csv-btn {
+	background: rgb(0, 0, 145);
+	border-radius: 0.375em;
+	color: #fff;
+	margin-bottom: 1em;
+	padding: 0.5em 1em;
+	transition: background 0.1s linear;
+}
+
+#demo-csv-btn:hover {
+	background: rgb(0, 0, 100);
+}
+
+.ballon-toggle, .ballon-toggle:hover, .ballon-toggle:focus {
+	background-color: var(--formBg);
+}
+
+.ballon-toggle {
+	border-radius: 0.375em 0.375em 0 0;
+	margin: 0;
+	padding: 0.25em 1em;
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: none;
+	width: 4.5em;
+	height: 1.5em;
+}
+
+.ballon-toggle:before {
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	border-bottom: 0.5em solid;
+	color: var(--pColor);
+	content: "";
+	display: block;
+	position: absolute;
+	top: 33%;
+	left: calc(50% - 0.5em);
+	width: 0; 
+	height: 0; 
+	transition: color 0.1s linear;
+}
+.ballon-toggle:hover:before, .ballon-toggle:focus:before {
+	color: var(--buttonBg);
+}
+
+.arrow-open svg {
+  display: block;
+  margin: auto;
+  width: 1.5em;
+  height: 1.5em;
+  transform: rotate(180deg);
+	color: white;
+	cursor: pointer;
+}
+
+.arrow-open svg:hover {
+	transform: scale(1.2, 1.2) rotate(180deg);
+}
+
+.arrow-closed svg {
+  display: block;
+  margin: auto;
+  width: 2em;
+  height: 4em;
+  transform: rotate(0deg);
+	color: white;
+	cursor: pointer;
+}
+
+.arrow-closed svg:hover {
+	transform: scale(1.2, 1.2);
+}
+
+.ballon-open {
+  color: var(--pColor);
+	font: 1em/1.5 "Hind", -apple-system, sans-serif;
+	transform: translateY(0%);
+}
+
+.ballon-open.open {
+  background: rgb(0, 0, 0);
+  height: 85%;
+  /* transition: 0.3s linear; */
+	border-radius: 10px;
+	transition: 0.5s linear, 0.5s linear;
+	transform: translateY(0);
+}
+
+.ballon-open.closed {
+  width: 0%;
+	transition: 0.5s linear, 0.5s linear;
+	transform: translateY(-4%);
+}
+
+.ballon-open .ballon-toggle:before {
+	border-bottom: 0;
+	border-top: 0.5em solid;
+}
+.sr {
+	clip: rect(1px,1px,1px,1px);
+	overflow: hidden;
+	position: absolute;
+}
+.upload-btn, .upload-btn input[type=text], .upload-btn input[type=file] + button {
+	margin-bottom: 0.75em;
+}
+.upload-btn {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+}
+.upload-btn input[type=text] {
+	width: calc(62.5% - 0.375em);
+}
+.upload-btn input[type=file], .upload-btn input[type=file] + button {
+	width: calc(37.5% - 0.375em);
+}
+.upload-btn input[type=file] {
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	height: 3em;
+}
+.upload-btn input[type=file] + button svg {
+	display: block;
+	margin: auto;
+	width: 1.5em;
+	height: 1.5em;
+}
+.upload-btn input[type=file] + button path {
+	fill: #fff;
+}
+
+.data-last-imported p {
+	color: white;
+}
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--formBg: #17181c;
+		--inputBg: #2e3138;
+		--inputDisableBg: #2e3138;
+		--inputBorder: #5c6270;
+		--pColor: #e3e4e8;
+	}
+}
