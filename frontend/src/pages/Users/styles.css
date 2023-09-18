@@ -27,11 +27,15 @@
 }
 
 .table-matricula {
-  width: 25%;
+  width: 15%;
+}
+
+.table-perfil {
+  width: 15%;
 }
 
 .table-acoes {
-  width: 25%;
+  width: 20%;
 }
 
 .section-table-cad table {

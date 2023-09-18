@@ -99,7 +99,7 @@ const UsersPage = () => {
                 >
                   Matrícula
                 </th>
-                <th className="table-matricula">Perfil</th>
+                <th className="table-perfil">Perfil</th>
                 <th className="table-acoes">Ações</th>
               </tr>
             </thead>
