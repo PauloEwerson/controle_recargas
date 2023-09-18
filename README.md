@@ -170,6 +170,8 @@ O relatório fornece um resumo das vendas e um ranking dos vendedores.
 
 ## Tela de Instalação
 
+- Acessível em "https://host/recargas/#/install
+
 ![Tela de Instalação](.github/08_install.png)
 
 Esta é a tela de instalação e configuração. Nela, você deve fornecer detalhes para a conexão com o banco de dados:
@@ -200,11 +202,12 @@ Após a instalação, será solicitado que você vá para a tela de login. A tel
 - **Matrícula**: admin
 - **Senha**: admin
 
+> **Nota**: Por razões de segurança, é altamente recomendado alterar o usuário e senha padrões após o primeiro acesso.
+
 ### Senha phpMyAdmin
 - **Usuário**: user
 - **Senha**: password
 
-> **Nota**: Por razões de segurança, é altamente recomendado alterar o usuário e senha padrões após o primeiro acesso.
 
 ## Suporte
 
