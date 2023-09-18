@@ -89,11 +89,10 @@ export const UsersProvider = (props) => {
     setToggle(!toggle); // altera para o modo de edição
   };
 
-  // Atualiza um operador no banco de dados e atualiza o estado
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     try {
-      // Controi o objeto com os dados a serem atualizados
+      // Constrói o objeto com os dados a serem atualizados
       const dataToUpdate = { id: updateId };
 
       if (updateName) dataToUpdate.name = updateName;
@@ -105,14 +104,23 @@ export const UsersProvider = (props) => {
 
       if (response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'success' });
-        setDataUsers(dataUsers.map(
-          (user) => user.id === updateId ? response.data.status.user : user
-        ));
+
+        const updatedUser = response.data.status.user;
+        let updatedUsers = dataUsers.map(user => user.id === updateId ? updatedUser : user);
+        updatedUsers.sort((a, b) => {
+          if (sortBy === "name") {
+            return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else {
+            return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+          }
+        });
+        setDataUsers(updatedUsers);
+
+        setToggle(!toggle); // Alterna para o modo de edição
       } else if (!response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'error' });
       }
 
-      setToggle(!toggle); // altera para o modo de edição
     } catch (error) {
       console.log(error);
       if (!error.response.data.status.success) {
