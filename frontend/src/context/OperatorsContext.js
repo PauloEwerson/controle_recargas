@@ -22,23 +22,39 @@ export const OperatorsProvider = (props) => {
     setMessage,
   } = useContext(MessageContext);
 
-  // Busca os operadores cadastrados no banco de dados e armazena no estado
   const fetchOperators = async () => {
     const response = await api('get', '/api/operators/operators.php');
 
+    // Se os dados vierem do Portal de Sacolas
     if (response.data && Array.isArray(response.data) && response.data.length > 0 && response.data[0].hasOwnProperty('matricula')) {
-       // se o primeiro valor de operator.matricula.registration for 0, remova o 0
       const transformedData = response.data.map(operator => ({
         id: operator.matricula,
         name: operator.nome,
         registration: operator.matricula.toString().slice(-4)[0] === '0'
-         ? operator.matricula.toString().slice(-3)
+          ? operator.matricula.toString().slice(-3)
           : operator.matricula.toString().slice(-4),
       }));
-      
-      setDataOperators(transformedData);
+
+      // Oedena os dados
+      const sortedData = transformedData.sort((a, b) => {
+        if (sortBy === "name") {
+          return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+        } else {
+          return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+        }
+      });
+
+      setDataOperators(sortedData);
     } else {
-      setDataOperators(response.data);
+      // Ordenando os dados
+      const sortedData = response.data.sort((a, b) => {
+        if (sortBy === "name") {
+          return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+        } else {
+          return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+        }
+      });
+      setDataOperators(sortedData);
     }
   };
 
@@ -50,7 +66,18 @@ export const OperatorsProvider = (props) => {
       const response = await api('post', '/api/operators/operators.php', { name, registration });
 
       if (response.data.status.success) {
-        setDataOperators([...dataOperators, response.data.status.operator])
+
+        const newOperator = response.data.status.operator;
+        let updatedOperators = [...dataOperators, newOperator];
+        updatedOperators.sort((a, b) => {
+          if (sortBy === "name") {
+            return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else {
+            return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+          }
+        });
+
+        setDataOperators(updatedOperators)
         setMessage({ message: response.data.status.message, status: 'success' });
       } else if (!response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'error' });
