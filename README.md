@@ -170,7 +170,7 @@ O relatório fornece um resumo das vendas e um ranking dos vendedores.
 
 ## Tela de Instalação
 
-- Acessível em "https://host/recargas/#/install
+- Acessível em "https://host/recargas/#/install" (adapte ao seu caso).
 
 ![Tela de Instalação](.github/08_install.png)
 
