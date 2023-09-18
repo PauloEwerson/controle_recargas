@@ -29,15 +29,24 @@ export const UsersProvider = (props) => {
   // Busca os operadores cadastrados no banco de dados e armazena no estado
   const fetchUsers = async () => {
     const response = await api('get', '/api/users/users.php');
-    setDataUsers(response.data);
+
+    // Ordenando os dados
+    const sortedData = response.data.sort((a, b) => {
+      if (sortBy === "name") {
+        return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      } else {
+        return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+      }
+    });
+    setDataUsers(sortedData);
   };
 
   // Adiciona um novo operador no banco de dados e atualiza o estado 
   const handleSubmitUsers = async ({ name, registration, password, perfil }) => {
-    
+
     try {
       const response = await api('post', '/api/users/users.php',
-      { name, registration, password, perfil }
+        { name, registration, password, perfil }
       );
 
       if (response.data.status.success) {
@@ -75,7 +84,7 @@ export const UsersProvider = (props) => {
     try {
       // Controi o objeto com os dados a serem atualizados
       const dataToUpdate = { id: updateId };
-      
+
       if (updateName) dataToUpdate.name = updateName;
       if (updateRegistration) dataToUpdate.registration = updateRegistration;
       if (updatePassword) dataToUpdate.password = updatePassword;
