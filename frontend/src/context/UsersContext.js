@@ -135,7 +135,6 @@ export const UsersProvider = (props) => {
 
       const response = await api('delete', `/api/users/users.php/${id}`);
 
-
       if (response.data.success) {
         // Atualiza o estado com os operadores que não foram deletados
         setDataUsers(dataUsers.filter(user => user.id !== id));
