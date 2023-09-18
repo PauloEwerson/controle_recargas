@@ -50,7 +50,18 @@ export const UsersProvider = (props) => {
       );
 
       if (response.data.status.success) {
-        setDataUsers([...dataUsers, response.data.status.user])
+
+        const newUser = response.data.status.user;
+        let updatedUsers = [...dataUsers, newUser];
+        updatedUsers.sort((a, b) => {
+          if (sortBy === "name") {
+            return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else {
+            return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+          }
+        });
+
+        setDataUsers(updatedUsers)
         setMessage({ message: response.data.status.message, status: 'success' });
       } else if (!response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'error' });
