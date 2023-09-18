@@ -29,19 +29,39 @@ export const UsersProvider = (props) => {
   // Busca os operadores cadastrados no banco de dados e armazena no estado
   const fetchUsers = async () => {
     const response = await api('get', '/api/users/users.php');
-    setDataUsers(response.data);
+
+    // Ordenando os dados
+    const sortedData = response.data.sort((a, b) => {
+      if (sortBy === "name") {
+        return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      } else {
+        return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+      }
+    });
+    setDataUsers(sortedData);
   };
 
   // Adiciona um novo operador no banco de dados e atualiza o estado 
   const handleSubmitUsers = async ({ name, registration, password, perfil }) => {
-    
+
     try {
       const response = await api('post', '/api/users/users.php',
-      { name, registration, password, perfil }
+        { name, registration, password, perfil }
       );
 
       if (response.data.status.success) {
-        setDataUsers([...dataUsers, response.data.status.user])
+
+        const newUser = response.data.status.user;
+        let updatedUsers = [...dataUsers, newUser];
+        updatedUsers.sort((a, b) => {
+          if (sortBy === "name") {
+            return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else {
+            return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+          }
+        });
+
+        setDataUsers(updatedUsers)
         setMessage({ message: response.data.status.message, status: 'success' });
       } else if (!response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'error' });
@@ -69,13 +89,12 @@ export const UsersProvider = (props) => {
     setToggle(!toggle); // altera para o modo de edição
   };
 
-  // Atualiza um operador no banco de dados e atualiza o estado
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     try {
-      // Controi o objeto com os dados a serem atualizados
+      // Constrói o objeto com os dados a serem atualizados
       const dataToUpdate = { id: updateId };
-      
+
       if (updateName) dataToUpdate.name = updateName;
       if (updateRegistration) dataToUpdate.registration = updateRegistration;
       if (updatePassword) dataToUpdate.password = updatePassword;
@@ -85,14 +104,23 @@ export const UsersProvider = (props) => {
 
       if (response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'success' });
-        setDataUsers(dataUsers.map(
-          (user) => user.id === updateId ? response.data.status.user : user
-        ));
+
+        const updatedUser = response.data.status.user;
+        let updatedUsers = dataUsers.map(user => user.id === updateId ? updatedUser : user);
+        updatedUsers.sort((a, b) => {
+          if (sortBy === "name") {
+            return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+          } else {
+            return sortOrder === "asc" ? a.registration.localeCompare(b.registration) : b.registration.localeCompare(a.registration);
+          }
+        });
+        setDataUsers(updatedUsers);
+
+        setToggle(!toggle); // Alterna para o modo de edição
       } else if (!response.data.status.success) {
         setMessage({ message: response.data.status.message, status: 'error' });
       }
 
-      setToggle(!toggle); // altera para o modo de edição
     } catch (error) {
       console.log(error);
       if (!error.response.data.status.success) {
@@ -106,7 +134,6 @@ export const UsersProvider = (props) => {
     try {
 
       const response = await api('delete', `/api/users/users.php/${id}`);
-
 
       if (response.data.success) {
         // Atualiza o estado com os operadores que não foram deletados
