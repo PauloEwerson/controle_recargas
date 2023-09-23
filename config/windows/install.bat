@@ -54,9 +54,9 @@ if "%escolha%"=="s" (
 )
 
 :: Passo 4 de 4
+echo ###############################################################
 echo Acesse o link abaixo para importar as tabelas no banco de dados
 echo https://%HOST%/recargas/#/install
-echo -------------------------------
+echo --------------------------------------
 echo Apos a instalacao, a rota sera bloqueada para evitar que outros usuarios acessem.
-echo -------------------------------
 echo Duvidas, entre em contato com o desenvolvedor

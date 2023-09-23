@@ -1,61 +1,79 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Caminho para o arquivo config.json
-set CONFIG_JSON_PATH="..\\..\\backend\\src\\config\\config.json"
+set CONFIG_JSON_PATH=..\..\backend\src\config\config.json
+set TEMP_JSON_PATH=temp_config.json
 
-:: Função para perguntar e confirmar a entrada do usuário
-:ask_and_confirm
-set prompt=%~1
-set config_key=%~2
+set db_host=
+set db_name=
+set db_user=
+set db_password=
+set filial=
+set reuse_operators=false
 
-:confirm_loop
-set /p input="%prompt%: "
-echo Voce informou: !input!
-set /p confirm="Esta correto? (s/n): "
+echo Vamos configurar a conexao com o banco de dados!
 
-if "!confirm!"=="s" (
-    :: Chamar o script VBScript para atualizar o valor no arquivo config.json
-    cscript //nologo update_config.vbs %config_key% !input!
-    goto :eof
-) else if "!confirm!"=="n" (
-    echo Por favor, insira o valor novamente.
-    goto confirm_loop
+:ask_host
+echo Informe o host do banco de dados
+set /p db_host=
+echo Voce informou: !db_host!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_host
+
+:ask_db_name
+echo Informe o nome do banco de dados
+set /p db_name=
+echo Voce informou: !db_name!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_db_name
+
+:ask_db_user
+echo Informe o nome de usuario do banco de dados
+set /p db_user=
+echo Voce informou: !db_user!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_db_user
+
+:ask_db_password
+echo Informe a senha do banco de dados
+set /p db_password=
+echo Voce informou: !db_password!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_db_password
+
+:ask_filial
+echo Informe o numero da filial
+set /p filial=
+echo Voce informou: !filial!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_filial
+
+:ask_reuse_operators
+echo Voce deseja reutilizar os usuarios do Portal de Sacolas? (s/n)
+set /p reuse_operators=
+echo Voce informou: !reuse_operators!
+set /p confirm=Esta correto? (s/n): 
+if "%confirm%"=="n" goto ask_reuse_operators
+if "%reuse_operators%"=="s" (
+    set reuse_operators=true
 ) else (
-    echo Entrada invalida. Por favor, responda com 's' ou 'n'.
-    goto confirm_loop
+    set reuse_operators=false
 )
 
-:: Iniciar o processo de configuração
-echo Bem-vindo, vamos configurar a conexão com o BD
+:: Cria um novo JSON com as configuracoes informadas
+(
+    echo {
+    echo   "db_host": "!db_host!",
+    echo   "db_name": "!db_name!",
+    echo   "db_user": "!db_user!",
+    echo   "db_password": "!db_password!",
+    echo   "filial": "!filial!",
+    echo   "reuse_operators": !reuse_operators!,
+    echo   "installed": true
+    echo }
+) > !TEMP_JSON_PATH!
 
-:: Perguntar e confirmar cada parâmetro
-call :ask_and_confirm "Informe o host do banco de dados" "db_host"
-call :ask_and_confirm "Informe o nome do banco de dados" "db_name"
-call :ask_and_confirm "Informe o nome de usuario do banco de dados" "db_user"
-call :ask_and_confirm "Informe a senha do banco de dados" "db_password"
-call :ask_and_confirm "Informe o numero da filial" "filial"
+:: Move o JSON para o local correto
+move /Y !TEMP_JSON_PATH! !CONFIG_JSON_PATH!
 
-:: Perguntar sobre reuse_operators
-:reuse_operators_loop
-set /p confirm="Voce deseja reutilizar os usuarios do Portal de Sacolas? (s/n): "
-echo Voce informou: !confirm!
-set /p final_confirm="Esta correto? (s/n): "
-
-if "!final_confirm!"=="s" (
-    :: Chamar o script VBScript para atualizar o valor no arquivo config.json
-    cscript //nologo update_config.vbs "reuse_operators" !confirm!
-    goto :eof
-) else if "!final_confirm!"=="n" (
-    echo Por favor, insira o valor novamente.
-    goto reuse_operators_loop
-) else (
-    echo Entrada invalida. Por favor, responda com 's' ou 'n'.
-    goto reuse_operators_loop
-)
-
-:: Definir 'installed' como true
-:: Chamar o script VBScript para atualizar o valor no arquivo config.json
-cscript //nologo update_config.vbs "installed" "true"
-
-echo ✅ Configuracao concluida com sucesso!
+echo Configuracao concluida com sucesso!
