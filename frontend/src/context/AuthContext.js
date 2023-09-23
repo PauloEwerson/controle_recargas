@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await api('post', '/api/auth/login.php', credentials);
-                
                 if (response.data && response.data.message === "Login realizado com sucesso.") {
                     setIsAuthenticated(true);
                     const user = {

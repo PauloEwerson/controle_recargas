@@ -3,8 +3,7 @@
   "db_name": "recargas_db",
   "db_user": "user",
   "db_password": "password",
-  "reuse_operators": false,
   "filial": "999",
-  "db_charset": "utf8",
+  "reuse_operators": false,
   "installed": false
 }

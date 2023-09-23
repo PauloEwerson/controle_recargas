@@ -1,124 +1,82 @@
-.form-input {
-  display: block;
-  width: 100%;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--bs-body-color);
-  appearance: none;
-  background-color: var(--bs-body-bg);
-  background-clip: padding-box;
-  border: var(--bs-border-width) solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+/* Nova folha de estilo CSS */
+
+/* Estilo geral para o bloco de instalação */
+.installation-container {
+  background-color: #FFB88C;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.input-error {
-  border-color: #dc3545;
-}
-
-.installation-block {
-  background: #f77e29;
-  background: -webkit-linear-gradient(to bottom, #FFB88C, #f77e29);
-  background: linear-gradient(to bottom, #FFB88C, #f77e29);
-  float: left;
-  width: 100%;
-  padding: 50px 0;
-  height: 100%;
-}
-
-.container-block {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 15px 20px 0px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  height: 100%;
-  margin: 0 auto;
-}
-
-.installation-sec {
-  padding: 50px 30px;
-  position: relative;
-}
-
-.installation-sec .copy-text {
+/* Estilo para o painel de instalação */
+.installation-panel {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 20px;
-  font-size: 13px;
+  width: 60%;
 }
 
-.installation-sec h2 {
-  margin-bottom: 30px;
-  font-weight: 800;
+/* Estilo para os cabeçalhos */
+.installation-header {
   font-size: 30px;
+  font-weight: 800;
   color: #f77e29;
+  margin-bottom: 20px;
 }
 
-.installation-sec h2:after {
-  content: " ";
-  width: 100px;
-  height: 5px;
-  background: #FEB58A;
-  display: block;
+/* Estilo para os sub-cabeçalhos */
+.installation-subheader {
+  margin-bottom: 30px;
+}
+
+/* Estilo para os botões */
+.installation-button {
+  background-color: #f77e29;
+  color: #ffffff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilo para os botões ao passar o mouse */
+.installation-button:hover {
+  background-color: #ff6a00;
+}
+
+/* Estilo para os botões */
+.installation-button-next {
+  background-color: #127500;
+  color: #ffffff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilo para os botões ao passar o mouse */
+.installation-button-next:hover {
+  background-color: #106a00;
+}
+
+/* Estilo para as mensagens */
+.installation-message {
   margin-top: 20px;
-  border-radius: 3px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 18px;
 }
 
-#btn-install {
-  background: #f77e29;
-  color: #fff;
-  font-weight: 600;
-}
-
-/* SPINNER */
-
-.lds-ellipsis-dot {
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #fff;
-  margin: 0 2px;
-  animation: lds-ellipsis-dot 0.6s infinite;
-}
-
-@keyframes lds-ellipsis-dot {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.section-message {
-  text-align: center;
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-}
-
-
+/* Estilo para mensagens de sucesso */
 .success-message {
   color: #1d9f19;
 }
 
+/* Estilo para mensagens de erro */
 .error-message {
   color: #dc3545;
-}
-
-.select-form {
-  background-color: #3d3d3d;
-  color: white;
-  padding: 0.2rem;
-  width: 5rem;
-  border: none;
-  font-size: 20px;
-}
-
-.select-form select option {
-  padding: 30px;
 }
