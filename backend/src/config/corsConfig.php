@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header('Status: 204');
     header('HTTP/1.1 204 No Content');
     header('Content-Type: application/json; charset=UTF-8');
+    header('Content-Disposition: attachment; filename=config.json');
     exit();
 }
 
@@ -30,3 +31,4 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json; charset=UTF-8');
+header('Content-Disposition: attachment; filename=config.json');

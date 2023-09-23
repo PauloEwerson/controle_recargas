@@ -9,9 +9,8 @@ $host = $config['db_host'];
 $db_name = $config['db_name'];
 $db_user = $config['db_user'];
 $db_password = $config['db_password'];
-$charset = $config['db_charset'];
 
-$dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
+$dsn = "mysql:host=$host;dbname=$db_name;charset=utf8";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

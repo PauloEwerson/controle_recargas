@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api";
-import Loading from "../../shared/Loading";
 import "./styles.css";
 
-const Installation = () => {
-  const [dbHost, setDbHost] = useState("");
-  const [dbName, setDbName] = useState("");
-  const [dbUser, setDbUser] = useState("");
-  const [dbPassword, setDbPassword] = useState("");
-  const [dbCharset, setDbCharset] = useState("utf8");
-  const [filial, setFilial] = useState("");
-  const [message, setMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [touchedHost, setTouchedHost] = useState(false);
-  const [touchedDb, setTouchedDb] = useState(false);
-  const [touchedUser, setTouchedUser] = useState(false);
-  const [touchedPassword, setTouchedPassword] = useState(false);
-  const [reuseOperators, setReuseOperators] = useState(false);
-  const [touchedFilial, setTouchedFilial] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [installationComplete, setInstallationComplete] = useState(false);
+import Loading from "../../shared/Loading";
 
+const Installation = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [installationMessage, setInstallationMessage] = useState("");
+  const [showNextButton, setShowNextButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const checkInstallation = async () => {
@@ -41,177 +28,99 @@ const Installation = () => {
     checkInstallation();
   }, []);
 
-  const handleInstall = async () => {
-    setSubmitted(true);
-    if (!dbHost || !dbName || !dbUser || !dbPassword || !filial) {
-      setMessage("Por favor, preencha todos os campos.");
-      setSuccessMessage("error");
-      return;
-    }
+  const executeStep = async (stepNumber) => {
     try {
       setIsLoading(true);
-      const response = await api("post", "/api/install/install.php", {
-        db_host: dbHost,
-        db_name: dbName,
-        db_user: dbUser,
-        db_password: dbPassword,
-        reuse_operators: reuseOperators,
-        db_charset: dbCharset,
-        filial: filial
-    });
-    
+      setShowNextButton(false);
+      const response = await api(
+        "get",
+        `/api/install/install.php?step=${stepNumber}`
+      );
+      const result = response.data;
+      setInstallationMessage(result);
 
-      if (response.data.status === "success") {
-        setSuccessMessage("success");
-        setMessage(response.data.message);
-        setInstallationComplete(true);
-      } else {
-        setSuccessMessage("error");
-        setMessage(response.data.message);
+      if (result.status === "success") {
+        setShowNextButton(true);
       }
     } catch (error) {
-      setSuccessMessage("error");
-      setMessage("Instalação falhou. Porfavor tente novamente.");
+      setInstallationMessage("Ocorreu um erro durante a instalação.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleNextStep = () => {
+    setCurrentStep(currentStep + 1);
+    setInstallationMessage("");
+    setShowNextButton(false);
+  };
+
+  const navigateToLogin = () => {
+    window.location.href = "/recargas";
+  };
+
   return (
-    <section className="installation-block">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className="container-block">
-          <div className="installation-sec">
-            <h2 className="text-center">Instalação</h2>
-            <form className="installation-form">
-              <div className="form-group">
-                <label>Host:</label>
-                <input
-                  type="text"
-                  className={`form-input ${
-                    !dbHost && (touchedHost || submitted) ? "input-error" : ""
-                  }`}
-                  value={dbHost}
-                  onChange={(e) => setDbHost(e.target.value)}
-                  onBlur={() => setTouchedHost(true)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Nome do Banco:</label>
-                <input
-                  type="text"
-                  className={`form-input ${
-                    !dbName && (touchedDb || submitted) ? "input-error" : ""
-                  }`}
-                  value={dbName}
-                  onChange={(e) => setDbName(e.target.value)}
-                  onBlur={() => setTouchedDb(true)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Usuário do Banco:</label>
-                <input
-                  type="text"
-                  className={`form-input ${
-                    !dbUser && (touchedUser || submitted) ? "input-error" : ""
-                  }`}
-                  value={dbUser}
-                  onChange={(e) => setDbUser(e.target.value)}
-                  onBlur={() => setTouchedUser(true)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Senha do Banco:</label>
-                <input
-                  type="password"
-                  className={`form-input ${
-                    !dbPassword && (touchedPassword || submitted)
-                      ? "input-error"
-                      : ""
-                  }`}
-                  value={dbPassword}
-                  onChange={(e) => setDbPassword(e.target.value)}
-                  onBlur={() => setTouchedPassword(true)}
-                />
-              </div>
+    <div className="installation-container">
+      <div className="installation-panel">
+      {currentStep !== 7 && <h1 className="installation-header">Instalação</h1>}
 
-              <div className="form-group">
-                <label>Reutilizar operadores do Portal de Sacolas?</label>
-                <select
-                  className="select-form"
-                  value={reuseOperators}
-                  onChange={(e) => setReuseOperators(e.target.value === "true")}
-                >
-                  <option value="true">Sim</option>
-                  <option value="false">Não</option>
-                </select>
-              </div>
+        <div>
+          <h3 className="installation-subheader">
+            {currentStep !== 7 && `Passo ${currentStep}: `}
 
-              <div className="form-group">
-                <label>Nº Filial:</label>
-                <input
-                  type="text"
-                  className={`form-input ${
-                    !filial && (touchedFilial || submitted) ? "input-error" : ""
-                  }`}
-                  value={filial}
-                  onChange={(e) => setFilial(e.target.value)}
-                  onBlur={() => setTouchedFilial(true)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Database Charset:</label>
-                <p style={{ marginLeft: "1rem", color: "red" }}>
-                  Já definido! Mude apenas se for necessário
-                </p>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={dbCharset}
-                  onChange={(e) => setDbCharset(e.target.value)}
-                />
-              </div>
-              <div className="form-check">
-                {installationComplete ? (
-                  <button
-                    type="button"
-                    id="btn-go-to-login"
-                    className="btn float-right btn-success"
-                    onClick={() => {
-                      window.location.href = "/recargas"; // Redireciona para a tela de login
-                    }}
-                  >
-                    Ir para o Login
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    id="btn-install"
-                    className="btn float-right"
-                    onClick={handleInstall}
-                  >
-                    Instalar
-                  </button>
-                )}
-              </div>
-              {message && (
-                <p
-                  className={`section-message ${
-                    successMessage === "success"
-                      ? "success-message"
-                      : "error-message"
-                  }`}
+            {currentStep === 1 && "Teste a Conexão com o Banco de Dados"}
+            {currentStep === 2 && "Verifique a disponibilidade das tabelas"}
+            {currentStep === 3 && "Reutilização de sac_operadores ou Criação de Operators_Recargas"}
+            {currentStep === 4 && "Criar Tabela Users_Recargas"}
+            {currentStep === 5 && "Criar Tabela Analytics_Recargas"}
+            {currentStep === 6 && "Criar Tabela DataTables_Recargas"}
+            {currentStep === 7 && "Instalação Finalizada!"}
+          </h3>
+
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div>
+              {currentStep === 7 ? (
+                <button
+                  className="installation-button-next"
+                  onClick={navigateToLogin}
                 >
-                  {message}
-                </p>
+                  Ir para o login
+                </button>
+              ) : showNextButton ? (
+                <button
+                  className="installation-button-next"
+                  onClick={handleNextStep}
+                >
+                  Avançar
+                </button>
+              ) : (
+                <button
+                  className="installation-button"
+                  onClick={() => executeStep(currentStep)}
+                >
+                  Executar
+                </button>
               )}
-            </form>
+            </div>
+          )}
+          <div className="installation-message">
+            {installationMessage && (
+              <div
+                className={
+                  installationMessage.status === "error"
+                    ? "error-message"
+                    : "success-message"
+                }
+              >
+                {installationMessage.message}
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </section>
+      </div>
+    </div>
   );
 };
 
