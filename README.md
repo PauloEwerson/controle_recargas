@@ -39,6 +39,10 @@ O projeto também oferece um CRUD para gerenciar operadores e um relatório que 
 
 ### Instalação
 
+**Preparativos:**
+- Certifique-se de que o diretório principal esteja nomeado como `recargas`
+- Caso aplicável, solicite o arquivo "assets.zip" ao desenvolvedor e substituia em `recargas/frontend/src`
+
 1. **No terminal a partir do projeto, acesse o diretório de configuração referente ao seu Sistema Operacional (Windows ou Linux)**:
    - Windows`:
    ```bash
@@ -51,7 +55,7 @@ O projeto também oferece um CRUD para gerenciar operadores e um relatório que 
 
 ### Windows
 2. **Execute o script de instalação**:
-   - no CMD, execute: `install.bat`:
+   - no CMD, execute: `install.bat`
    ```bash
    install.bat
      ```
