@@ -34,46 +34,68 @@ O projeto também oferece um CRUD para gerenciar operadores e um relatório que 
 ### Pré-requisitos
 
 - Servidor que suporte **PHP 7.4** para o backend.
-- **Node.js** para buildar o frontend em React (será servido de forma estática).
+- **npm**.
 - Banco de dados **MariaDB 5.5**.
 
 ### Instalação
 
-1. **Acesse o Diretório de Configuração**:
-   - Mude para o diretório `config`:
-     ```bash
-     cd config
+1. **No terminal a partir do projeto, acesse o diretório de configuração referente ao seu Sistema Operacional (Windows ou Linux)**:
+   - Windows`:
+   ```bash
+   cd config/windows
+   ```
+   - Linux`:
+   ```bash
+   cd config/linux
+   ```
+
+### Windows
+2. **Execute o script de instalação**:
+   - no CMD, execute: `install.bat`:
+   ```bash
+   install.bat
+     ```
+2. **Configuração do host**:
+   - `set_host.bat` Defina o host web para acessar o projeto recargas:
+   ```bash
+   NomeDoHost
+     ```
+   - https://NomeDoHost/recargas
+
+3. **Construindo a aplicação**:
+   - `build.bat` Caso o node_modules não esteja instalado no frontend, informe "s" para proseguir com a instalação: 
+   ```bash
+   Deseja instalar o node_modules? (s/n):
+   - s
      ```
 
-2. **Execute o Script de Instalação**:
-   - Inicie o processo de configuração executando o script `install.sh`:
-     ```bash
-     ./install.sh
-     ```
-   - O script dará início ao processo de configuração e fará uma série de perguntas para ajustar o ambiente conforme necessário.
+   - Ou instale acessando o diretório frontend
+   ```bash
+   cd frontend
+   npm install
+   ```
+   - Aguarde o script executar o build da aplicação e mover os arquivos para a raiz do projeto.
 
-3. **Configuração do Host**:
-   - Será solicitado que você informe o host. Por exemplo, se seu web host for "https://WebHost/recargas", você deve inserir apenas "WebHost" quando solicitado. 
-   
-4. **Construção da Aplicação**:
-   - O script perguntará se você deseja construir a aplicação. Confirme e ele começará a preparar o frontend.
-   - Será verificado se o diretório `node_modules` existe. Se não existir, o script perguntará se você deseja instalá-lo. Confirme para continuar.
-   - Após a instalação das dependências, o script construirá a aplicação.
-   - O script então verificará a existência de arquivos de build antigos e perguntará se você deseja substituí-los. Confirme para continuar.
-
-5. **Configuração do Banco de Dados**:
-   - Ao final da execução, você será informado de que a instalação está completa e será fornecido um link para configurar o banco de dados. Acesse esse link para finalizar a configuração.
-   - Após a instalação, a rota de configuração do banco de dados será bloqueada por segurança.
-   - Para mais detalhes, visite a [tela de instalação](#tela-de-instalação).
-
-
+4. **Configuração do banco de dados**:
+   - `db_install.bat` Siga os passos para configurar os dados de conexão com o banco de dados
+   ```bash
+   - Host
+   - Nome
+   - Usuário
+   - Senha
+   - Número da filial
+   - Reutilizar os usuários (dedicado à contexto específico)
+   ```
+5. **Montagem das tabelas no banco de dados**:
+   - Acesse o link fornecido no final da instalação: `https://NomeDoHost/recargas/#/install` 
+   - Siga os passos informados no navegador para montar as tabelas no banco de dados
+     
 ## Executando Localmente (Desenvolvimento)
 
 ## Pré-requisitos
 
 - Docker e Docker Compose
 - Node.js (para o frontend)
-- Git Bash para execução de Shell Scripts (Ambiente Windows)
 
 Para iniciar os containers:
 
